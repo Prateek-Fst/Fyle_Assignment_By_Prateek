@@ -28,3 +28,7 @@ This application is built using HTML, CSS, and JavaScript.
 ## Contact Details
 
 Email: choudharyprateek131@gmail.cpm
+
+## ScreenShots of the App
+<img width="1440" alt="Screenshot 2024-04-11 at 6 18 35 PM" src="https://github.com/Prateek-Fst/Fyle_Assignment_By_Prateek/assets/147906999/a802aa26-341d-4a47-9e90-02934a8e3d3a">
+<img width="1440" alt="Screenshot 2024-04-11 at 6 18 59 PM" src="https://github.com/Prateek-Fst/Fyle_Assignment_By_Prateek/assets/147906999/3c8e66c9-998e-40f5-9547-c8e4b917078c">
