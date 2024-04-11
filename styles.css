@@ -1,0 +1,127 @@
+.main {
+    border: 1px solid black;
+    margin: auto;
+    width: 33%;
+    padding: 3vh;
+    margin-top: 7%;
+    padding-top: 7%;
+    padding-bottom: 7%;
+    padding-left: 3%;
+    padding-right: 3%;
+    border-radius: 1vh;
+    background-image: linear-gradient(rgb(80, 185, 226) ,rgb(14, 94, 205));
+   
+}
+select{
+    width:33vw;
+    padding: 1vh;
+    border-radius: 1vh;
+}
+@media (max-width: 768px) {
+  
+     .main {
+        width: 80%; 
+    }
+}
+input{
+    padding:1vh;
+    width:30vw;
+    border-radius: 1vh;
+}
+button{
+    width:33vw;
+    padding: 1vh;
+    border-radius: 1vh;
+    background-color: rgb(126, 171, 156);
+
+}
+
+.error-icon {
+    display: none;
+    color: red;
+    cursor: pointer;
+  }
+  .info-icon {
+    display: inline;
+    margin-left: 5px;
+    cursor: help;
+  }
+  .tooltip {
+    position: relative;
+    display: inline-block;
+   
+  }
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .tooltip .question-mark {
+    cursor: help;
+  }
+  
+  .tooltip .question-mark:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  } 
+  #messageDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f8f9fa;
+    padding: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    display: none;
+    height:45vh;
+    width:40vw;
+   text-align: center;
+   padding-top:25vh ;
+   border-radius: 1vh;
+   font-size: 2vh;
+  }
+  
+  .info-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: red;
+    cursor: pointer;
+}
+
+.input-group {
+    position: relative;
+}
+
+input[type="text"] {
+    padding-right: 30px; 
+}
+
+.tooltip .tooltiptext {
+    display: none;
+}
+
+
+.info-icon:hover + .tooltiptext {
+    display: block;
+}

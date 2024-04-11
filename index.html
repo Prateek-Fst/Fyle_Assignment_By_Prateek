@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form id="taxForm">
+            <label for="income">Enter gross annual income <span class="tooltip"><span class="question-mark"
+                        title="Gross annual income is the total income earned in a year before any deductions or taxes.">?</span><span
+                        class="tooltiptext">Gross annual income is the total salary  earned in a year before any
+                        deductions.</span></span></label> <br>
+                        <div class="tooltip input-group">
+                            <input type="text" id="income" placeholder="Enter gross annual income">
+                            <span class="info-icon" title="Please enter numbers only">!</span>
+                            <span class="tooltiptext">Please Enter number only</span>
+                        </div>
+                        
+            <span class="error-icon" id="incomeErrorIcon" title="Enter a valid income!">!</span>
+            <br><br>
+            <label for="extraIncome">Enter extra income <span class="tooltip"><span class="question-mark"
+                        title="Extra income refers to any additional income earned from sources other than primary employment, such as investments or side jobs.">?</span><span
+                        class="tooltiptext">Extra income refers to any additional income earned from sources other than
+                        primary employment, such as investments or side jobs.</span></span></label> <br>
+                        <div class="tooltip input-group">
+                            <input type="text" id="extraIncome" placeholder="Enter extra income from other sources">
+                            <span class="info-icon" title="Please enter numbers only">!</span>
+                            <span class="tooltiptext">Please enter numbers only</span>
+                        </div>
+            <span class="error-icon" id="extraIncomeErrorIcon" title="Enter a valid extra income!">!</span>
+            <br><br>
+            <label for="age">Enter age group <span class="tooltip"><span class="question-mark"
+                        title="Age group determines the tax rate applicable to your income.">?</span><span
+                        class="tooltiptext">Age group determines the tax rate applicable to your
+                        income.</span></span></label> <br>
+            <select id="age" required>
+                <option value="<40">&lt;40</option>
+                <option value=">=40&<60">&ge;40 &lt;60</option>
+                <option value=">=60">&ge;60</option>
+            </select>
+            <span class="error-icon" id="ageErrorIcon" title="Age is mandatory!">!</span>
+            <br><br>
+            <label for="deductions">Enter total applicable deductions <span class="tooltip"><span class="question-mark"
+                        title="Deductions are expenses or allowances that reduce your taxable income, such as contributions to retirement accounts or mortgage interest payments.">?</span><span
+                        class="tooltiptext">Deductions are expenses or allowances that reduce your taxable income, such
+                        as contributions to retirement accounts or mortgage interest payments.</span></span></label>
+            <br>
+            <div class="tooltip input-group">
+                <input type="text" id="deductions" placeholder="Enter total applicable deductions">
+                <span class="info-icon" title="Please enter numbers only">!</span>
+                <span class="tooltiptext">Please enter numbers only</span>
+            </div>
+            <span class="error-icon" id="deductionsErrorIcon" title="Enter a valid deduction amount!">!</span>
+            <br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div id="messageDiv">
+        <button id="closeButton">Close</button>
+        <p id="messageText"></p>
+    </div>
+    <script>
+        document.getElementById('taxForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            document.querySelectorAll('.error-icon').forEach(function (icon) {
+                icon.style.display = 'none';
+            });
+            document.getElementById('messageText').innerText = '';
+
+            let hasErrors = false;
+            const age = document.getElementById('age').value;
+            const income = parseFloat(document.getElementById('income').value);
+            const extraIncome = parseFloat(document.getElementById('extraIncome').value);
+            const deductions = parseFloat(document.getElementById('deductions').value) || 0; 
+
+            if (!age || isNaN(income) || isNaN(extraIncome)) {
+                document.getElementById('messageText').innerText = 'Please fill in all required fields.';
+                document.getElementById('messageDiv').style.display = 'block';
+                hasErrors = true;
+            } else {
+                const totalIncome = income + (extraIncome || 0);
+                const overallIncome = totalIncome - deductions;
+                if (overallIncome <= 800000) {
+                    document.getElementById('messageText').innerText = 'No tax is applicable.';
+                    document.getElementById('messageDiv').style.display = 'block';
+                } else {
+                   
+                    let taxRate;
+                    if (age === '<40') {
+                        taxRate = 0.3;
+                    } else if (age === '>=40&<60') {
+                        taxRate = 0.4;
+                    } else if (age === '>=60') {
+                        taxRate = 0.1;
+                    }
+
+                    // Calculating tax amount
+                    const taxableIncome = Math.max(0, overallIncome - 800000);
+                    const taxAmount = taxRate * taxableIncome;
+
+                    const messageDiv = document.getElementById('messageDiv');
+                    const messageText = document.getElementById('messageText');
+                    messageText.innerText = `Your overall income will be ${taxAmount.toFixed(2)} after tax deduction`;
+                    messageDiv.style.display = 'block';
+                }
+            }
+        });
+
+       
+        document.getElementById('closeButton').addEventListener('click', function () {
+            document.getElementById('messageDiv').style.display = 'none';
+        });
+        document.querySelectorAll('.info-icon').forEach(function(icon) {
+            icon.addEventListener('click', function() {
+                const tooltip = this.nextElementSibling;
+                tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+
+</body>
+
+</html>
