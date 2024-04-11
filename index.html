@@ -7,32 +7,33 @@
     <title>Tax Calculator</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* CSS styles */
     </style>
 </head>
+
 <body>
     <div class="main">
         <form id="taxForm">
             <label for="income">Enter gross annual income <span class="tooltip"><span class="question-mark"
                         title="Gross annual income is the total income earned in a year before any deductions or taxes.">?</span><span
-                        class="tooltiptext">Gross annual income is the total salary  earned in a year before any
+                        class="tooltiptext">Gross annual income is the total salary earned in a year before any
                         deductions.</span></span></label> <br>
-                        <div class="tooltip input-group">
-                            <input type="text" id="income" placeholder="Enter gross annual income">
-                            <span class="info-icon" title="Please enter numbers only">!</span>
-                            <span class="tooltiptext">Please Enter number only</span>
-                        </div>
-                        
+            <div class="tooltip input-group">
+                <input type="text" id="income" placeholder="Enter gross annual income">
+                <span class="info-icon" title="Please enter numbers only">!</span>
+                <span class="tooltiptext">Please Enter number only</span>
+            </div>
             <span class="error-icon" id="incomeErrorIcon" title="Enter a valid income!">!</span>
             <br><br>
             <label for="extraIncome">Enter extra income <span class="tooltip"><span class="question-mark"
                         title="Extra income refers to any additional income earned from sources other than primary employment, such as investments or side jobs.">?</span><span
                         class="tooltiptext">Extra income refers to any additional income earned from sources other than
                         primary employment, such as investments or side jobs.</span></span></label> <br>
-                        <div class="tooltip input-group">
-                            <input type="text" id="extraIncome" placeholder="Enter extra income from other sources">
-                            <span class="info-icon" title="Please enter numbers only">!</span>
-                            <span class="tooltiptext">Please enter numbers only</span>
-                        </div>
+            <div class="tooltip input-group">
+                <input type="text" id="extraIncome" placeholder="Enter extra income from other sources">
+                <span class="info-icon" title="Please enter numbers only">!</span>
+                <span class="tooltiptext">Please enter numbers only</span>
+            </div>
             <span class="error-icon" id="extraIncomeErrorIcon" title="Enter a valid extra income!">!</span>
             <br><br>
             <label for="age">Enter age group <span class="tooltip"><span class="question-mark"
@@ -59,6 +60,7 @@
             <span class="error-icon" id="deductionsErrorIcon" title="Enter a valid deduction amount!">!</span>
             <br><br>
             <button type="submit">Submit</button>
+            <button type="button" id="resetButton">Reset</button>
         </form>
     </div>
     <div id="messageDiv">
@@ -112,15 +114,23 @@
             }
         });
 
-       
         document.getElementById('closeButton').addEventListener('click', function () {
             document.getElementById('messageDiv').style.display = 'none';
         });
+
         document.querySelectorAll('.info-icon').forEach(function(icon) {
             icon.addEventListener('click', function() {
                 const tooltip = this.nextElementSibling;
                 tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
             });
+        });
+
+        document.getElementById('resetButton').addEventListener('click', function() {
+            document.querySelectorAll('input[type="text"]').forEach(function(input) {
+                input.value = '';
+            });
+            document.getElementById('age').selectedIndex = 0;
+            document.getElementById('messageDiv').style.display = 'none';
         });
     </script>
 
